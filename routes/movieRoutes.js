@@ -3,12 +3,13 @@ import { Movie } from "../models/movies.js";
 import { Stream } from "../models/streaming.js";
 import isLoggedIn from "../middleware/middleware.cjs"
 import { Strategy } from "passport-local";
+import cors from 'cors';
 import {streamWeights} from "../algos/streamWeights.js"
 const debugLvl1 = true;
 
 var router = express.Router();
 
-router.post('/:id', isLoggedIn, async (req, res) => {
+router.post('/:id', cors(), isLoggedIn, async (req, res) => {
     if(debugLvl1 === true){
         console.log('*******************************')
         console.log('/movie/:id')

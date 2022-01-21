@@ -61,7 +61,6 @@ db.once("open", () => {
 
 const app = express();
 const port = process.env.PORT || 3060;
-const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN;
 
 app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({ extended: true }))
@@ -101,8 +100,9 @@ app.use(session(sessionConfig))
 app.use(bodyParser.json({ limit: '30mb', extended: true }));
 app.use(bodyParser.urlencoded({ limit: '30mb', extended: true }))
 app.use(cors({
-    origin: "https://mtisby.github.io/cinema-save-client/",
-    credentials: true
+    origin:'*',
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200,
 }))
 
 app.use(cookieParser(secret))
